@@ -80,12 +80,12 @@ public class Flock : MonoBehaviour
     private void flockDestroyer(Flock other) {
         if (other != null && other.gameObject != null) {
             DestroyImmediate(other.gameObject);
-            Debug.Log("other flock destroyed");
+            //Debug.Log("other flock destroyed");
         }
 
         if (gameObject != null) {
             DestroyImmediate(gameObject);
-            Debug.Log("self flock destroyed");
+            //Debug.Log("self flock destroyed");
         }
     }
 }

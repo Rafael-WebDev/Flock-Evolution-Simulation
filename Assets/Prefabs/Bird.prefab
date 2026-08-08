@@ -113,9 +113,10 @@ MonoBehaviour:
   _flockPrefab: {fileID: 6666104997329973635, guid: ff796a2929bbc724cabdd73d4dcb0410, type: 3}
   _movementSpeed: 5
   _panicSpeedCoeficient: 1.5
-  _rotationSpeed: 200
+  _rotationSpeed: 100
   _SeparationCoef: 1
   _CohesionCoef: 1
+  _uTurnAngle: 60
   _targetDirection: {x: 0, y: 0}
 --- !u!1 &4586982476227832504
 GameObject:
@@ -191,7 +192,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1580134735
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -7775379800463524260, guid: 5034083bde2b1294181c48fd54868f4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

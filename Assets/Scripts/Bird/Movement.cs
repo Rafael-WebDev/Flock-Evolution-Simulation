@@ -19,6 +19,9 @@ public class Movement : MonoBehaviour
     private float _SeparationCoef; //multiplies whit the base value of the flock
     [SerializeField]
     private float _CohesionCoef; //multiplies whit the base value of the flock
+
+    [SerializeField]
+    private float _uTurnAngle;
     
     private Rigidbody2D _rigidBody;
     public Vector2 _targetDirection;
@@ -62,7 +65,7 @@ public class Movement : MonoBehaviour
         if (minFlock == null) {
             GameObject objFlock = Instantiate(_flockPrefab, transform.position, transform.rotation);
             minFlock = objFlock.GetComponent<Flock>();
-            Debug.Log("flock created");
+            //Debug.Log("flock created");
         }
 
         _flockAwarness = minFlock;
@@ -92,7 +95,7 @@ public class Movement : MonoBehaviour
             _targetRotation = Quaternion.RotateTowards(transform.rotation, rotation, _rotationSpeed * Time.deltaTime);
 
         } else if (_flockAwarness._baseCohesionDist * _CohesionCoef < _distanceCenterFlock) {
-            Quaternion rotation = Quaternion.LookRotation(transform.forward, _targetDirection) * Quaternion.Euler(0,0,180);
+            Quaternion rotation = Quaternion.LookRotation(transform.forward, _targetDirection) * Quaternion.Euler(0,0,_uTurnAngle);
             _targetRotation = Quaternion.RotateTowards(transform.rotation, rotation, _rotationSpeed * Time.deltaTime);
 
         } else {
@@ -104,7 +107,7 @@ public class Movement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Bird")) {
-            transform.rotation *= Quaternion.Euler(0f,0f,180f);
+            transform.rotation *= Quaternion.Euler(0f,0f,_uTurnAngle);
         }
 
         if (other.gameObject.CompareTag("Border")) {
