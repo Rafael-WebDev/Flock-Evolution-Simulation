@@ -26,3 +26,14 @@ When using this code for your personal project, make sure to adapt it with whate
 ## Note for commenters
 If you want to guide me or ask a question, feel free to do so in the comments.
 If you're more comfortable speaking another language than English, you can speak to me in French, Portuguese, or Spanish, as I am a fluent speaker of the first two and a moderate one in the last one.
+
+## Credits
+Here is the list of the assets from the Unity Asset Store I used for the graphics:
+- For the background:
+> - <u>Pixel Skies DEMO Background pack</u>, by <b>Digital Moons</b>
+> -  https://assetstore.unity.com/packages/2d/environments/pixel-skies-demo-background-pack-226622
+- For the entities' graphics (birds, prey, food):
+> - <u>2D Cute Birds(4 in 1) Mini pack</u>, by <b>SR Studios Kerala</b>
+> - https://assetstore.unity.com/packages/2d/characters/2d-cute-birds-4-in-1-mini-pack-237273
+
+
