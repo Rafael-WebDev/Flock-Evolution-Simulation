@@ -22,6 +22,10 @@ public class Movement : MonoBehaviour
 
     [SerializeField]
     private float _uTurnAngle;
+    [SerializeField]
+    private float _gravityCoeficient; //changes the force of gravity
+    [SerializeField]
+    private bool _gravityToggle; //toggle the slight pull down directional vector
     
     private Rigidbody2D _rigidBody;
     public Vector2 _targetDirection;
@@ -41,7 +45,7 @@ public class Movement : MonoBehaviour
 
     void Update() {
         updateFlockData();
-        UpdateFlockCenterDirection();
+        UpdateBirdDirection();
         RotateTowardsFlockCenter();
         SetVelocity();
     }
@@ -75,15 +79,23 @@ public class Movement : MonoBehaviour
     }
 
     //individual movement
-    private void UpdateFlockCenterDirection() {
+    private void UpdateBirdDirection() {
         Vector2 centerFlockToBird = _flockTransform.position - transform.position;
         float coef = _flockAwarness._flockAttractionCoeficient;
         Vector2 flockDirection = _flockAwarness._avgFlockDirection;
+        Vector2 gravityVector = GetGravityVector();
         
-        Vector2 weightedSum = (centerFlockToBird * coef) + (flockDirection * (1-coef));
+        Vector2 weightedSum = (centerFlockToBird * (1 - coef)) + (flockDirection * coef);
         Vector2 Sum = centerFlockToBird + flockDirection;
 
         Vector2 averageDirection = weightedSum / Sum;
+
+        if (_gravityToggle) {
+            weightedSum = (averageDirection * coef) + (gravityVector * (1-coef));
+            Sum = centerFlockToBird + gravityVector;
+
+            averageDirection = weightedSum / Sum;
+        }
 
         _targetDirection = averageDirection.normalized;
     }
@@ -117,6 +129,10 @@ public class Movement : MonoBehaviour
 
     private void SetVelocity() {
         _rigidBody.linearVelocity = transform.up * _movementSpeed;
+    }
+
+    private Vector2 GetGravityVector() {
+        return Vector2.down * _gravityCoeficient;
     }
 
     //when the bird is reproducing

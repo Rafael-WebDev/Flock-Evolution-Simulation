@@ -386,7 +386,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _birdPrefab: {fileID: 2045078061729407420, guid: 9338860f117d086468eff944e368340b, type: 3}
   _flockPrefab: {fileID: 6666104997329973635, guid: ff796a2929bbc724cabdd73d4dcb0410, type: 3}
-  _numberOfBirds: 32
+  _numberOfBirds: 64
+  _maxPositionRange: 15
 --- !u!1 &2002485493
 GameObject:
   m_ObjectHideFlags: 0
