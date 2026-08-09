@@ -14,7 +14,7 @@ An attempt, using the Unity engine, to create a simple yet realistic flock of bi
 </div>
 
 ## Future Implementations
-- An organic and realistic representation of a flock of birds;
+- <del>An organic and realistic representation of a flock of birds</del>; &#10003;
 - A random change in the values of each bird clone on creation;
 - A collision-based reproduction system with the child clone sharing an average of the parents' clone's values;
 - A chance to have a random mutation on the child's values when a couple of birds are reproducing;
@@ -25,6 +25,9 @@ An attempt, using the Unity engine, to create a simple yet realistic flock of bi
 - A bird food growth/reproductive system;
 - A preference for a specific food for prey birds;
 - A preference of prey for the predatory birds.
+- Add UI elements
+- Adding a spawning and zoom in/out system when clicking or using the scroll wheel of a mouse;
+- Add a way to save the evolutionary data;
 - ...
 
 ## Note for contributers
