@@ -1,6 +1,17 @@
 # Flock-Evolution-Simulation
 ## Description
 An attempt, using the Unity engine, to create a simple yet realistic flock of birds that act and evolve as in their natural environment. The code can also be adapted to interpret a herd of animals or a school of fish.
+<div style="display: flex;">
+  <div style="display: flex; flex-direction: column;">
+    <img src="./Media/Flock-Simulation-Img1.png" width="300" height="280" alt="Flock simulation image 1">
+    <img src="./Media/Flock-Simulation-Img2.png" width="300" height="280" alt="Flock simulation image 2">
+  </div>
+
+  <video width="300" height="280" controls>
+    <source src="./Media/Flock-Simulation-Vid.mp4" type="video/mp4">
+    Github doesn't suport the video preview.
+  </video>
+</div>
 
 ## Future Implementations
 - An organic and realistic representation of a flock of birds;
