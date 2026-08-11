@@ -44,9 +44,14 @@ public class Movement : MonoBehaviour
     }
 
     void Update() {
+        //update info whit the flock
         updateFlockData();
         UpdateBirdDirection();
+        
+        //updates the direction of movement
         RotateTowardsFlockCenter();
+
+        //makes the bird move
         SetVelocity();
     }
 
@@ -104,22 +109,46 @@ public class Movement : MonoBehaviour
         if (_flockAwarness._baseSeparationDist * _SeparationCoef >= _distanceCenterFlock)
         {
             Quaternion rotation = Quaternion.LookRotation(transform.forward, _targetDirection);
+            rotation = RotateSprite(rotation);
             _targetRotation = Quaternion.RotateTowards(transform.rotation, rotation, _rotationSpeed * Time.deltaTime);
 
         } else if (_flockAwarness._baseCohesionDist * _CohesionCoef < _distanceCenterFlock) {
             Quaternion rotation = Quaternion.LookRotation(transform.forward, _targetDirection) * Quaternion.Euler(0,0,_uTurnAngle);
+            rotation = RotateSprite(rotation);
             _targetRotation = Quaternion.RotateTowards(transform.rotation, rotation, _rotationSpeed * Time.deltaTime);
 
         } else {
             return;
         }
-
         _rigidBody.SetRotation(_targetRotation);
+    }
+
+    //TO FIX: birds aren't rotating in the X and Y axis???
+    private Quaternion RotateSprite(Quaternion rotateTowards) { //for aesthetic reasons
+        //When the rotation of the Z axis of the bird is in between:
+        //- [0º,90º[: the rotation of the bird in the X and Y axis will be 0º;
+        //- [90º,180º[: the rotation of the bird in the X axis will be 180º and in the Y axis will be 0º;
+        //- [180º,270º[: the rotation of the bird in the X and Y axis will be 180º;
+        //- [270º,360º[: the rotation of the bird in the X axis will be 0º and in the Y axis will be 180º.
+
+        float Z = rotateTowards.eulerAngles.z;
+        Quaternion spriteRotation;
+
+
+        if (Z >= 0 && Z < 90) spriteRotation = Quaternion.Euler(0,0,Z);
+        else if (Z >= 90 && Z < 180) spriteRotation = Quaternion.Euler(180,0,Z);
+        else if (Z <= 0 && Z > -90) spriteRotation = Quaternion.Euler(180,180,Z);
+        else if (Z <= -90 && Z > -180) spriteRotation = Quaternion.Euler(0,180,Z);
+        else spriteRotation = Quaternion.Euler(0,0,Z);
+        //Debug.Log($"Z = {Z}");
+        //Debug.Log($"spriteRotation = {spriteRotation.eulerAngles}");
+
+        return spriteRotation;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Bird")) {
-            transform.rotation *= Quaternion.Euler(0f,0f,_uTurnAngle);
+            transform.rotation *= RotateSprite(Quaternion.Euler(0f,0f,_uTurnAngle));
         }
 
         if (other.gameObject.CompareTag("Border")) {
